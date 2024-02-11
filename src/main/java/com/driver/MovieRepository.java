@@ -1,5 +1,6 @@
 package com.driver;
 
+
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 @Repository
 public class MovieRepository {
+    /*
     HashMap<String, Movie> movieDb = new HashMap<>();
     HashMap<String, Director> directorDb = new HashMap<>();
     HashMap<String, String> movieDirectorPair = new HashMap<>();
@@ -91,4 +93,59 @@ public class MovieRepository {
         }
         return movies;
     }
+
+ */
+    private final Map<String, Movie> movieMap = new HashMap<>();
+    private final Map<String, Director> directorMap = new HashMap<>();
+    private final Map<String, String> movieDirectorPair = new HashMap<>();
+public void addMovie(Movie movie) {
+    movieMap.put(movie.getName(), movie);
 }
+
+    public void addDirector(Director director) {
+        directorMap.put(director.getName(), director);
+    }
+
+    public void addMovieDirectorPair(String movieName, String directorName) {
+        movieDirectorPair.put(movieName, directorName);
+    }
+
+    public Movie getMovieByName(String name) {
+        return movieMap.get(name);
+    }
+
+    public Director getDirectorByName(String name) {
+        return directorMap.get(name);
+    }
+
+    public List<String> getMoviesByDirectorName(String directorName) {
+        List<String> movies = new ArrayList<>();
+        for (Map.Entry<String, String> entry : movieDirectorPair.entrySet()) {
+            if (entry.getValue().equals(directorName)) {
+                movies.add(entry.getKey());
+            }
+        }
+        return movies;
+    }
+
+    public List<String> findAllMovies() {
+        List<String> movies = new ArrayList<>(movieMap.keySet());
+        return movies;
+    }
+
+    public void deleteDirectorByName(String directorName) {
+        directorMap.remove(directorName);
+        for (Map.Entry<String, String> entry : movieDirectorPair.entrySet()) {
+            if (entry.getValue().equals(directorName)) {
+                movieMap.remove(entry.getKey());
+                movieDirectorPair.remove(entry.getKey());
+            }
+        }
+    }
+
+    public void deleteAllDirectors() {
+        directorMap.clear();
+        movieDirectorPair.clear();
+    }
+}
+

@@ -8,6 +8,7 @@ import java.util.List;
 @Service
 
 public class MovieService {
+    /*
     public String addDirector;
     @Autowired
     MovieRepository movieRepository;
@@ -39,4 +40,45 @@ public class MovieService {
     public List<String> getMoviesByDirectorName(String director) {
         return movieRepository.getMoviesByDirectorName(director);
     }
+
+     */
+    private MovieRepository movieRepository;
+
+    public void addMovie(Movie movie) {
+        movieRepository.addMovie(movie);
+    }
+
+    public void addDirector(Director director) {
+        movieRepository.addDirector(director);
+    }
+
+    public void addMovieDirectorPair(String movieName, String directorName) {
+        movieRepository.addMovieDirectorPair(movieName, directorName);
+    }
+
+    public Movie getMovieByName(String name) {
+        return movieRepository.getMovieByName(name);
+    }
+
+    public Director getDirectorByName(String name) {
+        return movieRepository.getDirectorByName(name);
+    }
+
+    public List<String> getMoviesByDirectorName(String directorName) {
+        return movieRepository.getMoviesByDirectorName(directorName);
+    }
+
+    public List<String> findAllMovies() {
+        return movieRepository.findAllMovies();
+    }
+
+    public void deleteDirectorByName(String directorName) {
+        movieRepository.deleteDirectorByName(directorName);
+    }
+
+    public void deleteAllDirectors() {
+        movieRepository.deleteAllDirectors();
+    }
 }
+
+
